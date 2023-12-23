@@ -7,8 +7,37 @@
   - `npm run test-anagram`
 */
 
-function isAnagram(str1, str2) {
+let isAnagram = (str1, str2) => {
+  let count1 = Array(26).fill(0);
+  let count2 = Array(26).fill(0);
+
+  let n = str1.length;
+  let m = str2.length;
+
+  if(n != m) {
+    return false;
+  }
+
+  for(let i = 0; i < n; i++) {
+    count1[str1[i].charCodeAt(0) - 'a'.charCodeAt(0)] += 1
+  }
+  for(let i = 0; i < n; i++) {
+    count2[str2[i].charCodeAt(0) - 'a'.charCodeAt(0)] += 1
+  }
+
+  for (let i = 0; i < 26; i++){
+    if(count1[i] != count2[i]){
+      return false;
+    }
+  }
+
+
+  return true;
 
 }
 
-module.exports = isAnagram;
+console.log(isAnagram("abba", "abaa"));
+
+
+
+

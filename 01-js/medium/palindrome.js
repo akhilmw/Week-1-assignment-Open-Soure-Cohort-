@@ -6,8 +6,19 @@
   - `npm run test-palindrome`
 */
 
-function isPalindrome(str) {
+let isPalindrome = (str) => {
+  let n = str.length;
+  let i = 0;
+  let j = n - 1;
+  while(i <= j) {
+    if (str[i] != str[j]){
+      return false;
+    }
+    i += 1
+    j -= 1
+  }
+
   return true;
 }
 
-module.exports = isPalindrome;
+console.log(isPalindrome("malayalam"));
