@@ -17,6 +17,71 @@
   - `npm run test-calculator`
 */
 
-class Calculator {}
+class Calculator {
 
-module.exports = Calculator;
+  constructor(){
+    this.result = 0;
+  }
+
+  add(num) {
+    this.result += num
+  }
+
+  subtract(num) {
+    this.result -= num
+  }
+
+  multiply(num) {
+    this.result *= num
+  }
+
+  divide(num) {
+    if(num === 0){
+      throw new Error("Division by zero is not allowed!");
+    }
+    this.result /= num
+  }
+
+  clear(){
+    this.result = 0;
+  }
+
+  getResult(){
+    return this.result;
+  }
+
+  calculate(expression){
+    if (!/^[0-9\s+\-*/().]+$/.test(expression)) {
+      throw new Error("Expression contains values that are not allowed");
+    }
+
+    expression = expression.replace(/\s/g, "");
+
+    try {
+			//evaluate the expression, throw an error if the result in infinite or NaN
+			let result = eval(expression);
+			if (isNaN(result) || !isFinite(result)) {
+				throw new Error(
+					"Invalid input: Unable to evaluate the expression"
+				);
+			}
+
+			// assign the calculated result to the main result property
+			this.result = result;
+		} catch (error) {
+			throw new Error("Invalid input: Unable to evaluate the expression");
+		}
+
+  }
+}
+
+
+let calculator = new Calculator();
+calculator.calculate("10 +   2 *    (   6 - (4 + 1) / 2) + 7");
+console.log(calculator.getResult());
+calculator.add(5);
+calculator.add(55);
+console.log(calculator.getResult());
+
+
+
